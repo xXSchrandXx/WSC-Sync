@@ -3,6 +3,7 @@ package de.xxschrandxx.wsc.wscsync.bungee;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.logging.Level;
 
@@ -42,7 +43,7 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
         String urlString = getConfiguration().getString(MinecraftSyncVars.Configuration.url);
         URL url;
         try {
-            url = new URL(urlString);
+            url = URI.create(urlString).toURL();
         } catch (MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
