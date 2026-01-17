@@ -7,16 +7,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 import net.milkbowl.vault.permission.Permission;
 
 public class VaultHandler implements IPermissionHandler {
 
-    protected final IMinecraftSyncCoreAPI api;
+    protected final ISyncCoreAPI api;
     protected final Permission plugin;
     protected final String world;
 
-    public VaultHandler(IMinecraftSyncCoreAPI api) {
+    public VaultHandler(ISyncCoreAPI api) {
         this.api = api;
         this.plugin = Bukkit.getServer().getServicesManager().getRegistration(Permission.class).getProvider();;
         this.world = Bukkit.getWorlds().get(0).getName();

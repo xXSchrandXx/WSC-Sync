@@ -1,4 +1,4 @@
-package de.xxschrandxx.wsc.wscsync.bukkit.api;
+package de.xxschrandxx.wsc.wscsync.hytale.api;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -6,21 +6,21 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.UUID;
 
-import de.xxschrandxx.wsc.wscbridge.bukkit.api.MinecraftBridgeBukkitAPI;
-import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
+import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeAPI;
+import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeLogger;
 import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 import de.xxschrandxx.wsc.wscsync.core.api.SyncCoreAPI;
 import de.xxschrandxx.wsc.wscsync.core.api.exception.SyncGroupException;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.*;
 
-public class MinecraftSyncBukkitAPI extends MinecraftBridgeBukkitAPI implements ISyncCoreAPI {
+public class HytaleSyncAPI extends HytaleBridgeAPI implements ISyncCoreAPI {
 
     protected final URL url;
 
     protected final IPermissionHandler permHandler;
 
-    public MinecraftSyncBukkitAPI(URL url, PermissionPlugin permPlugin, MinecraftBridgeLogger logger, MinecraftBridgeBukkitAPI api) {
+    public HytaleSyncAPI(URL url, PermissionPlugin permPlugin, HytaleBridgeLogger logger, HytaleBridgeAPI api) {
         super(api, logger);
         this.url = url;
         switch(permPlugin) {
@@ -29,9 +29,6 @@ public class MinecraftSyncBukkitAPI extends MinecraftBridgeBukkitAPI implements 
                 break;
             case CloudNet:
                 this.permHandler = new CloudNetHandler(this);
-                break;
-            case Vault:
-                this.permHandler = new VaultHandler(this);
                 break;
             default:
                 this.permHandler = new DefaultHandler(this);

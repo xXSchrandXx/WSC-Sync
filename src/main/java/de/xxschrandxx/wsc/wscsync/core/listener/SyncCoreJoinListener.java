@@ -4,20 +4,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
-import de.xxschrandxx.wsc.wscsync.core.MinecraftSyncVars;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
+import de.xxschrandxx.wsc.wscsync.core.SyncVars;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 import de.xxschrandxx.wsc.wscsync.core.api.exception.SyncGroupException;
 
-public class MinecraftSyncCoreJoinListener {
+public class SyncCoreJoinListener {
     protected HashMap<UUID, Date> uuids = new HashMap<UUID, Date>();
-    protected final IMinecraftBridgePlugin<? extends IMinecraftSyncCoreAPI> instance;
-    public MinecraftSyncCoreJoinListener(IMinecraftBridgePlugin<? extends IMinecraftSyncCoreAPI> instance) {
+    protected final IBridgePlugin<? extends ISyncCoreAPI> instance;
+    public SyncCoreJoinListener(IBridgePlugin<? extends ISyncCoreAPI> instance) {
         this.instance = instance;
     }
     public void syncPlayer(UUID uuid) {
         if (uuids.containsKey(uuid)) {
-            if (uuids.get(uuid).before(new Date(System.currentTimeMillis() + instance.getConfiguration().getLong(MinecraftSyncVars.Configuration.syncOnJoinInterval)))) {
+            if (uuids.get(uuid).before(new Date(System.currentTimeMillis() + instance.getConfiguration().getLong(SyncVars.Configuration.syncOnJoinInterval)))) {
                 if (instance.getAPI().isDebugModeEnabled()) {
                     instance.getAPI().log("Skipped sync of " + uuid.toString() + " on join.");
                 }

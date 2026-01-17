@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import de.xxschrandxx.wsc.wscbridge.bungee.MinecraftBridgeBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.ConfigurationBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.command.SenderBungee;
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wscsync.bungee.api.MinecraftSyncBungeeAPI;
 import de.xxschrandxx.wsc.wscsync.bungee.commands.WSCSyncBungee;
@@ -18,13 +19,13 @@ import de.xxschrandxx.wsc.wscsync.bungee.listener.AddModuleListenerBungee;
 import de.xxschrandxx.wsc.wscsync.bungee.listener.MinecraftSyncBungeeJoinListener;
 import de.xxschrandxx.wsc.wscsync.bungee.listener.WSCBridgeConfigReloadListenerBungee;
 import de.xxschrandxx.wsc.wscsync.bungee.listener.WSCBridgePluginReloadListenerBungee;
-import de.xxschrandxx.wsc.wscsync.core.MinecraftSyncVars;
+import de.xxschrandxx.wsc.wscsync.core.SyncVars;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.PermissionPlugin;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugin<MinecraftSyncBungeeAPI> {
+public class MinecraftSyncBungee extends Plugin implements IBridgePlugin<MinecraftSyncBungeeAPI> {
 
     // start of api part
     public String getInfo() {
@@ -39,8 +40,15 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
 
     private MinecraftSyncBungeeAPI api;
 
+    private MinecraftBridgeLogger bridgeLogger;
+
+    @Override
+    public MinecraftBridgeLogger getBridgeLogger() {
+        return bridgeLogger;
+    }
+
     public void loadAPI(ISender<?> sender) {
-        String urlString = getConfiguration().getString(MinecraftSyncVars.Configuration.url);
+        String urlString = getConfiguration().getString(SyncVars.Configuration.url);
         URL url;
         try {
             url = URI.create(urlString).toURL();
@@ -48,12 +56,12 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        PermissionPlugin perm = PermissionPlugin.valueOf(getConfiguration().getString(MinecraftSyncVars.Configuration.plugin));
+        PermissionPlugin perm = PermissionPlugin.valueOf(getConfiguration().getString(SyncVars.Configuration.plugin));
         MinecraftBridgeBungee wsc = MinecraftBridgeBungee.getInstance();
         this.api = new MinecraftSyncBungeeAPI(
             url,
             perm,
-            getLogger(),
+            getBridgeLogger(),
             wsc.getAPI()
         );
     }
@@ -67,6 +75,7 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
     @Override
     public void onEnable() {
         instance = this;
+        bridgeLogger = new MinecraftBridgeLogger(getLogger());
 
         // Load configuration
         getLogger().log(Level.INFO, "Loading Configuration.");
@@ -85,7 +94,7 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
         getLogger().log(Level.INFO, "Loading Listener.");
         getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgeConfigReloadListenerBungee());
         getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgePluginReloadListenerBungee());
-        if (getConfiguration().getBoolean(MinecraftSyncVars.Configuration.syncOnJoinEnabled)) {
+        if (getConfiguration().getBoolean(SyncVars.Configuration.syncOnJoinEnabled)) {
             getProxy().getPluginManager().registerListener(getInstance(), new MinecraftSyncBungeeJoinListener(getInstance()));
         }
         getProxy().getPluginManager().registerListener(getInstance(), new AddModuleListenerBungee());
@@ -132,7 +141,7 @@ public class MinecraftSyncBungee extends Plugin implements IMinecraftBridgePlugi
             config = new ConfigurationBungee();
         }
 
-        if (MinecraftSyncVars.startConfig(getConfiguration(), getLogger())) {
+        if (SyncVars.startConfig(getConfiguration(), getBridgeLogger())) {
             if (!saveConfiguration()) {
                 return false;
             }

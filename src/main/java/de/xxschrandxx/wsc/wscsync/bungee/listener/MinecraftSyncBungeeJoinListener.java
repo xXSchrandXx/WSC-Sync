@@ -1,14 +1,14 @@
 package de.xxschrandxx.wsc.wscsync.bungee.listener;
 
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
-import de.xxschrandxx.wsc.wscsync.core.listener.MinecraftSyncCoreJoinListener;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.listener.SyncCoreJoinListener;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
-public class MinecraftSyncBungeeJoinListener extends MinecraftSyncCoreJoinListener implements Listener {
-    public MinecraftSyncBungeeJoinListener(IMinecraftBridgePlugin<? extends IMinecraftSyncCoreAPI> instance) {
+public class MinecraftSyncBungeeJoinListener extends SyncCoreJoinListener implements Listener {
+    public MinecraftSyncBungeeJoinListener(IBridgePlugin<? extends ISyncCoreAPI> instance) {
         super(instance);
     }
 

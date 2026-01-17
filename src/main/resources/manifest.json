@@ -1,0 +1,18 @@
+{
+  "Group": "WSC-Hytale",
+  "Name": "WSC-Hytale-Sync",
+  "Version": "${project.version}",
+  "Description": "WSC-Hytale-Sync",
+  "Authors": [{"Name": "xXSchrandXx"}],
+  "Website": "https://github.com/xXSchrandXx/WSC-Minecraft-Sync",
+  "ServerVersion": "*",
+  "Dependencies": {
+    "WSC-Hytale:WSC-Hytale-Bridge": "3.0.0"
+  },
+  "OptionalDependencies": {
+    "LuckPerms:LuckPerms": "*"
+  },
+  "DisabledByDefault": false,
+  "Main": "${project.groupId}.${project.artifactId}.hytale.HytaleSync",
+  "IncludesAssetPack": false
+}

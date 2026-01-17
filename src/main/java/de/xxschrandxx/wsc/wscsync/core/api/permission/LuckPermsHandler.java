@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.group.Group;
@@ -16,10 +16,10 @@ import net.luckperms.api.node.Node;
 
 public class LuckPermsHandler implements IPermissionHandler {
 
-    protected final IMinecraftSyncCoreAPI api;
+    protected final ISyncCoreAPI api;
     protected final LuckPerms plugin;
 
-    public LuckPermsHandler(IMinecraftSyncCoreAPI api) {
+    public LuckPermsHandler(ISyncCoreAPI api) {
         this.api = api;
         this.plugin = LuckPermsProvider.get();
     }

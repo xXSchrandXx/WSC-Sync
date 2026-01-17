@@ -5,22 +5,22 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.bungee.api.MinecraftBridgeBungeeAPI;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
-import de.xxschrandxx.wsc.wscsync.core.api.MinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.SyncCoreAPI;
 import de.xxschrandxx.wsc.wscsync.core.api.exception.SyncGroupException;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.*;
 
-public class MinecraftSyncBungeeAPI extends MinecraftBridgeBungeeAPI implements IMinecraftSyncCoreAPI {
+public class MinecraftSyncBungeeAPI extends MinecraftBridgeBungeeAPI implements ISyncCoreAPI {
 
     protected final URL url;
 
     protected final IPermissionHandler permHandler;
 
-    public MinecraftSyncBungeeAPI(URL url, PermissionPlugin permPlugin, Logger logger, MinecraftBridgeBungeeAPI api) {
+    public MinecraftSyncBungeeAPI(URL url, PermissionPlugin permPlugin, MinecraftBridgeLogger logger, MinecraftBridgeBungeeAPI api) {
         super(api, logger);
         this.url = url;
         switch(permPlugin) {
@@ -37,11 +37,11 @@ public class MinecraftSyncBungeeAPI extends MinecraftBridgeBungeeAPI implements 
     }
 
     public Response<String, Object> getGroups(UUID uuid) throws SocketTimeoutException, MalformedURLException, IOException {
-        return MinecraftSyncCoreAPI.getGroups(this, url, uuid);
+        return SyncCoreAPI.getGroups(this, url, uuid);
     }
 
     public void syncGroups(UUID uuid) throws SyncGroupException {
-        MinecraftSyncCoreAPI.syncGroups(this, url, uuid);
+        SyncCoreAPI.syncGroups(this, url, uuid);
     }
 
     public IPermissionHandler getHandler() {

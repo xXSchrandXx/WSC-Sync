@@ -9,14 +9,14 @@ import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionManagement;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 
 public class CloudNetHandler implements IPermissionHandler {
 
-    protected final IMinecraftSyncCoreAPI api;
+    protected final ISyncCoreAPI api;
     protected final IPermissionManagement plugin;
 
-    public CloudNetHandler(IMinecraftSyncCoreAPI api) {
+    public CloudNetHandler(ISyncCoreAPI api) {
         this.api = api;
         this.plugin = CloudNetDriver.getInstance().getPermissionManagement();
     }

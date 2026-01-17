@@ -1,13 +1,12 @@
 package de.xxschrandxx.wsc.wscsync.core;
 
-import java.util.logging.Logger;
-
+import de.xxschrandxx.wsc.wscbridge.core.api.IBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.configuration.AbstractConfiguration;
 import de.xxschrandxx.wsc.wscbridge.core.api.configuration.IConfiguration;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.PermissionPlugin;
 
-public class MinecraftSyncVars extends AbstractConfiguration {
-    public static boolean startConfig(IConfiguration<?> configuration, Logger logger) {
+public class SyncVars extends AbstractConfiguration {
+    public static boolean startConfig(IConfiguration<?> configuration, IBridgeLogger logger) {
         return startConfig(configuration, Configuration.class, defaults.class, logger);
     }
 

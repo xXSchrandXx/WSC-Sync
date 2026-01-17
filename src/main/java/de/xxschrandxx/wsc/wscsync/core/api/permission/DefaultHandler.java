@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wscsync.core.api.IMinecraftSyncCoreAPI;
+import de.xxschrandxx.wsc.wscsync.core.api.ISyncCoreAPI;
 
 public class DefaultHandler implements IPermissionHandler {
 
-    protected final IMinecraftSyncCoreAPI api;
-    public DefaultHandler(IMinecraftSyncCoreAPI api) {
+    protected final ISyncCoreAPI api;
+    public DefaultHandler(ISyncCoreAPI api) {
         this.api = api;
     }
 

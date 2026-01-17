@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wscsync</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 
 	<name>WSC-Minecraft-Sync</name>
 	<url>https://github.com/xXSchrandXx/WSC-Minecraft-Sync</url>
@@ -22,6 +22,11 @@
 		<repository>
 			<id>spigot-bungee-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+		</repository>
+		<!-- Hytale Repo-->
+		<repository>
+			<id>hytale-temp</id>
+			<url>https://nexus.lucko.me/repository/maven-hytale/</url>
 		</repository>
 		<!-- Permission Plugins -->
 		<!-- LuckPerms -->
@@ -55,11 +60,17 @@
 			<artifactId>bungeecord-api</artifactId>
 			<version>1.21-R0.3-SNAPSHOT</version>
 		</dependency>
+		<!-- Hytale -->
+		<dependency>
+			<groupId>com.hypixel.hytale</groupId>
+			<artifactId>HytaleServer</artifactId>
+			<version>2026.01.13-dcad8778f-20260115.201811-1</version>
+		</dependency>
 		<!-- WSC-Minecraft-Bridge -->
 		<dependency>
 			<groupId>de.xxschrandxx.wsc</groupId>
 			<artifactId>wscbridge</artifactId>
-			<version>2.0.5</version>
+			<version>3.0.0</version>
 		</dependency>
 		<!-- Permission plugins -->
 		<!-- LuckPerms -->

@@ -15,14 +15,14 @@ import de.xxschrandxx.wsc.wscbridge.core.api.Response;
 import de.xxschrandxx.wsc.wscsync.core.api.exception.SyncGroupException;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.IPermissionHandler;
 
-public class MinecraftSyncCoreAPI {
-    public static Response<String, Object> getGroups(IMinecraftSyncCoreAPI api, URL url, UUID uuid) throws SocketTimeoutException, MalformedURLException, IOException {
+public class SyncCoreAPI {
+    public static Response<String, Object> getGroups(ISyncCoreAPI api, URL url, UUID uuid) throws SocketTimeoutException, MalformedURLException, IOException {
         HashMap<String, Object> postData = new HashMap<String, Object>();
         postData.put("uuid", uuid.toString());
         Response<String, Object> request = api.requestObject(url, postData);
         return request;
     }
-    public static void syncGroups(IMinecraftSyncCoreAPI api, URL url, UUID uuid) throws SyncGroupException {
+    public static void syncGroups(ISyncCoreAPI api, URL url, UUID uuid) throws SyncGroupException {
         Response<String, Object> response;
         try {
             response = getGroups(api, url, uuid);
