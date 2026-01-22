@@ -32,6 +32,8 @@ import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgePluginReloadEventH
 import de.xxschrandxx.wsc.wscsync.core.SyncVars;
 import de.xxschrandxx.wsc.wscsync.core.api.permission.PermissionPlugin;
 import de.xxschrandxx.wsc.wscsync.hytale.api.HytaleSyncAPI;
+import de.xxschrandxx.wsc.wscsync.hytale.api.event.WSCSyncConfigReloadEventHytale;
+import de.xxschrandxx.wsc.wscsync.hytale.api.event.WSCSyncPluginReloadEventHytale;
 import de.xxschrandxx.wsc.wscsync.hytale.commands.WSCSyncHytale;
 import de.xxschrandxx.wsc.wscsync.hytale.listener.AddModuleListenerHytale;
 import de.xxschrandxx.wsc.wscsync.hytale.listener.MinecraftSyncHytaleJoinListener;
@@ -77,6 +79,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
             getBridgeLogger(),
             wsc.getAPI()
         );
+        HytaleServer.get().getEventBus().dispatchFor(WSCSyncPluginReloadEventHytale.class).dispatch(new WSCSyncPluginReloadEventHytale(sender));
     }
 
     public HytaleSyncAPI getAPI() {
@@ -178,7 +181,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
             }
             return reloadConfiguration(sender);
         }
-        HytaleServer.get().getEventBus().dispatchFor(WSCBridgeConfigReloadEventHytale.class).dispatch(new WSCBridgeConfigReloadEventHytale(sender));
+        HytaleServer.get().getEventBus().dispatchFor(WSCSyncConfigReloadEventHytale.class).dispatch(new WSCSyncConfigReloadEventHytale(sender));
         return true;
     }
 
