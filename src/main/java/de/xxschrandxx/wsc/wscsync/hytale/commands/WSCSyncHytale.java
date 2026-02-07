@@ -30,4 +30,9 @@ public class WSCSyncHytale extends AbstractCommand {
         new WSCSync(instance).execute(s, argsWithoutFirst);
         return CompletableFuture.completedFuture(null);
     }
+
+    @Override
+    protected boolean canGeneratePermission() {
+        return false;
+    }
 }
