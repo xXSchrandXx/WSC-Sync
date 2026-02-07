@@ -101,7 +101,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
         getLogger().atInfo().log("Loading Configuration.");
         SenderHytale sender = new SenderHytale(ConsoleSender.INSTANCE, getInstance());
         if (!reloadConfiguration(sender)) {
-            getLogger().atWarning().log("Could not load config.yml, disabeling plugin!");
+            getLogger().atWarning().log("Could not load config.json, disabeling plugin!");
             shutdown();
             return;
         }
@@ -143,7 +143,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
 
     // start config part
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File configFile = new File(getDataDirectory().toFile(), "config.yml");
+    private File configFile = new File(getDataDirectory().toFile(), "config.json");
     private ConfigurationHytale config;
 
     public ConfigurationHytale getConfiguration() {
@@ -160,7 +160,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
                 config = new ConfigurationHytale(gson.fromJson(json, HashMap.class));
             }
             catch (IOException e) {
-                getLogger().atWarning().log("Could not load config.yml.", e);
+                getLogger().atWarning().log("Could not load config.json.", e);
                 return false;
             }
         }
@@ -169,7 +169,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
                 configFile.createNewFile();
             }
             catch (IOException e) {
-                getLogger().atWarning().log("Could not create config.yml.", e);
+                getLogger().atWarning().log("Could not create config.json.", e);
                 return false;
             }
             config = new ConfigurationHytale();
@@ -201,7 +201,7 @@ public class HytaleSync extends JavaPlugin implements IBridgePlugin<HytaleSyncAP
             }
         }
         catch (IOException e) {
-            getLogger().atWarning().log("Could not save config.yml.", e);
+            getLogger().atWarning().log("Could not save config.json.", e);
             return false;
         }
         return true;
