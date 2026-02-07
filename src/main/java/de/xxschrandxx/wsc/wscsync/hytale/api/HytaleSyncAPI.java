@@ -27,8 +27,8 @@ public class HytaleSyncAPI extends HytaleBridgeAPI implements ISyncCoreAPI {
             case LuckPerms:
                 this.permHandler = new LuckPermsHandler(this);
                 break;
-            case CloudNet:
-                this.permHandler = new CloudNetHandler(this);
+            case Hytale:
+                this.permHandler = new HytaleHandler(this);
                 break;
             default:
                 this.permHandler = new DefaultHandler(this);

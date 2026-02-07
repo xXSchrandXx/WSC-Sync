@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wscsync</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 
 	<name>WSC-Minecraft-Sync</name>
 	<url>https://github.com/xXSchrandXx/WSC-Minecraft-Sync</url>
@@ -70,7 +70,7 @@
 		<dependency>
 			<groupId>de.xxschrandxx.wsc</groupId>
 			<artifactId>wscbridge</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.2</version>
 		</dependency>
 		<!-- Permission plugins -->
 		<!-- LuckPerms -->

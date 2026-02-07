@@ -16,7 +16,12 @@ public enum PermissionPlugin {
      * Still needs a plugin wich supports groups.
      * @see <a href="https://github.com/MilkBowl/VaultAPI">VaultAPI</a>
      */
-    Vault("Vault")
+    Vault("Vault"),
+    /**
+     * Hytale
+     * Default permission management (only for Hytale)
+     */
+    Hytale("Hytale")
     ;
 
     PermissionPlugin(String name) {
